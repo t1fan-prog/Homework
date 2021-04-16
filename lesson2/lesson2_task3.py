@@ -24,4 +24,4 @@ elif operation == "mod":
 elif operation == "f":
     print(f"Result {first_number // second_number}")
 else:
-    print("You haven't chosen right option in the first step. Try again")
+    print("You haven't chosen right option on the first step. Try again")
