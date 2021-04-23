@@ -12,7 +12,6 @@ a = 1
 while a <= 100:
     list_100.append(a)
     a += 1
-print(list_100)
 
 list_final = []
 
