@@ -17,7 +17,7 @@ list_final = []
 
 b = 0
 while b < 100:
-    if list_100[b] % 7 == 0 and not list_100[b] % 5 == 0:
+    if list_100[b] % 7 == 0 and list_100[b] % 5 != 0:
         list_final.append(list_100[b])
     b += 1
 
