@@ -17,17 +17,11 @@ prices = {
 
 total_sum = 0
 
-
-def math(ing):
-    global total_sum
-    sum1 = stock[f"{ing}"] * prices[f"{ing}"]
-    print(f"{ing}: {float(sum1)}")
-    total_sum += sum1
-
-
 print("Cost of each ingredient:\n")
 
-for i in iter(stock.keys()):
-    math(i)
+for key in stock:
+    sum1 = stock[f"{key}"] * prices[f"{key}"]
+    print(f"{key}: {float(sum1)}")
+    total_sum += sum1
 
 print(f"\nTotal cost of the stock is {total_sum}")
