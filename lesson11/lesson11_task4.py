@@ -19,3 +19,4 @@ except CustomException as ms:
     print(ms)
 else:
     print(a)
+
