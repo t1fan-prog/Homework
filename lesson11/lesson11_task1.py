@@ -27,4 +27,3 @@ class Student(Person):
         super().__init__(l_name, l_age, l_gender)
         self.average_grade = l_average_grade
         self.quantity_of_classmates = l_quantity_of_classmates
-

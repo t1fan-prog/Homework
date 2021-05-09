@@ -75,4 +75,3 @@ s = ProductStore()
 s.add(p, 10)
 
 s.add(p2, 300)
-
