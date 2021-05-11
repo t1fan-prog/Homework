@@ -2,10 +2,6 @@ from prettytable import PrettyTable
 
 
 class Product:
-    type = None
-    name = None
-    price = None
-    quantity = None
 
     def __init__(self, l_type, l_name, l_price):
         self.type = l_type
