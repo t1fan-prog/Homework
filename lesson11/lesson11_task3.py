@@ -72,4 +72,3 @@ s.add(p2, 300)
 
 
 s.get_all_products()
-
