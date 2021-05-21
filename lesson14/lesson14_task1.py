@@ -1,23 +1,8 @@
 def logger(func):
     def wrap_func(*args):
-        arg_list = []
-
-        for i in args:
-            arg_list.append(i)
-        str_arg_list = [str(i) for i in arg_list]
+        str_arg_list = [str(i) for i in args]
         arguments = ", ".join(str_arg_list)
-
-        a = func(*args)
-
-        if a == sum(arg_list):
-            print(f"Add called with {arguments}")
-        elif a == [arg ** 2 for arg in arg_list]:
-            print(f"Squaring called with {arguments}")
-        elif a == arg_list[0] - arg_list[1]:
-            print(f"Subtraction called with {arguments}")
-        elif a == arg_list[0] * arg_list[1]:
-            print(f"Multiplication called with {arguments}")
-
+        print(f'{func.__name__} called with {arguments}')
     return wrap_func
 
 

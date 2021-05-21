@@ -2,7 +2,6 @@ def stop_words(words: list):
     def test(func):
         def wrap_func(*args):
             args_list = func(*args).split()
-            print(args_list)
             for i in args_list:
                 if i in words:
                     args_list[args_list.index(i)] = "*"

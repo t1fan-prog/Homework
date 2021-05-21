@@ -1,15 +1,13 @@
 def arg_rules(type_: type, max_length: int, contains: list):
     def test(func):
         def wrap_func(name):
-
             def check():
                 """Проверяем наличие символов в аргументе"""
-                for i in contains:
-                    if i in name:
-                        result = True
-                    else:
-                        result = False
-                return result
+                try:
+                    [name.index(i) for i in contains]
+                    return True
+                except ValueError:
+                    return False
 
             rule1 = type(name) == type_
             rule2 = len(name) <= max_length
@@ -18,7 +16,7 @@ def arg_rules(type_: type, max_length: int, contains: list):
             if rule1 and rule2 and rule3:
                 return func(name)
             else:
-                print("NEPRAVILNO")
+                return f"Word should contain {', '.join(contains)} symbols"
 
         return wrap_func
     return test
@@ -29,4 +27,4 @@ def create_slogan(name: str) -> str:
     return f"{name} drinks pepsi in his brand new BMW!"
 
 
-print(create_slogan("S@SH05"))
+print(create_slogan("S@SH5"))
