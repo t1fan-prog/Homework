@@ -16,7 +16,8 @@ def arg_rules(type_: type, max_length: int, contains: list):
             if rule1 and rule2 and rule3:
                 return func(name)
             else:
-                return f"Word should contain {', '.join(contains)} symbols"
+                return f"Word should contain {', '.join(contains)} symbols, cointains not more than {max_length} " \
+                       f"symbols and be {type_} type"
 
         return wrap_func
     return test
@@ -27,4 +28,4 @@ def create_slogan(name: str) -> str:
     return f"{name} drinks pepsi in his brand new BMW!"
 
 
-print(create_slogan("S@SH5"))
+print(create_slogan("S@SH054444444444444444444444444444444444444444444444444444444"))

@@ -14,12 +14,11 @@ class ReworkEnumerate:
 
     def __next__(self):
         if len(self.iterable) > self.ind:
-            var = (self.iterable[self.ind])
-            val = (self.iterable.index(var), var)
+            var = self.iterable[self.ind]
+            val = self.ind, var
             self.ind += 1
         else:
             raise StopIteration
-        time.sleep(1)
         return val
 
 

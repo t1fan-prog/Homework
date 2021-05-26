@@ -1,22 +1,27 @@
 class ReworkRange:
 
-    def __init__(self, l_start, l_end, l_step=1):
-        self.start = l_start
-        self.end = l_end - 1
-        self.step = l_step
+    def __init__(self, l_start=0, l_end=0, l_step=1):
+        if l_end > 0:
+            self.start = l_start
+            self.end = l_end
+            self.step = l_step
+        else:
+            self.start = 0
+            self.end = l_start
+            self.step = 1
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        if self.start > self.end:
+        if self.start >= self.end:
             raise StopIteration
         val = self.start
         self.start += self.step
         return val
 
 
-tipo_range = ReworkRange(23, 65, 3)
+tipo_range = ReworkRange(5)
 
 for i in tipo_range:
     print(i)
