@@ -13,12 +13,14 @@ def arg_rules(type_: type, max_length: int, contains: list):
             rule2 = len(name) <= max_length
             rule3 = check()
 
-            if rule1 and rule2 and rule3:
-                return func(name)
+            if not rule1:
+                raise TypeError(f"Slogan must be {type_} type.")
+            elif not rule2:
+                raise Exception(f"Slogan must contain not more than {max_length} symbols.")
+            elif not rule3:
+                raise Exception(f"Slogan should contain {', '.join(contains)} symbols")
             else:
-                return f"Word should contain {', '.join(contains)} symbols, cointains not more than {max_length} " \
-                       f"symbols and be {type_} type"
-
+                return func(name)
         return wrap_func
     return test
 
@@ -28,4 +30,4 @@ def create_slogan(name: str) -> str:
     return f"{name} drinks pepsi in his brand new BMW!"
 
 
-print(create_slogan("S@SH054444444444444444444444444444444444444444444444444444444"))
+print(create_slogan("S@SH04"))
