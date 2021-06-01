@@ -1,0 +1,18 @@
+{
+  "person1":
+  {
+    "first_name": "Ann",
+    "last_name": "Smith",
+    "phone": "380923331122",
+    "city": "Los Angeles",
+    "state": "California"
+  },
+  "person2":
+  {
+    "first_name": "Tady",
+    "last_name": "Talor",
+    "phone": "3809233245222",
+    "city": "Liberty City",
+    "state": "Test state"
+  }
+}
