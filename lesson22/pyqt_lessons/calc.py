@@ -273,15 +273,7 @@ class UiMainWindow(object):
                 result = re.findall(r'[-+/*]\w+$', screen)[0]
                 # получаем индекс начала последнего числа
                 index_start = re.search(r'\w+$', screen).start()
-
-                if result[0] == '-':
-                    screen = screen[: index_start - 1] + "+" + screen[index_start:]
-                elif result[0] == '+':
-                    screen = screen[: index_start - 1] + "-" + screen[index_start:]
-                elif result[0] == '*':
-                    screen = screen[: index_start] + f'(-{screen[index_start:]})'
-                elif result[0] == '/':
-                    screen = screen[: index_start] + f'(-{screen[index_start:]})'
+                screen = self.change_label(result, screen, index_start)
                 self.output_label.setText(screen)
             except IndexError:
                 if screen[-1] == ")":
@@ -294,22 +286,35 @@ class UiMainWindow(object):
                 else:
                     self.output_label.setText("Error")
 
-    # Добавить точку
     def dot_it(self):
+        """Добавляет точку"""
         screen = self.output_label.text()
 
-        if screen[-1] == '.' or screen[-1] == ")":
+        if screen[-1] == '.' or screen[-1] == ")" or screen[-1] == "+" or screen[-1] == "-" or screen[-1] == "*" or \
+                screen[-1] == "/":
             pass
         else:
-            test = re.split(r'[-+/*\s]', screen)
-            if "." in test[-1]:
+            label = re.split(r'[-+/*\s]', screen)
+            if "." in label[-1]:
                 pass
             else:
                 self.output_label.setText(f'{screen}.')
 
+    def add_opetator(self, operator):
+        """Проверяет, есть ли в конце какой-либо оператор. Если нет, добавляет"""
+        screen = self.output_label.text()
+
+        label = re.split(r'[-+/*.)\s]', screen)
+        if not label[-1]:
+            pass
+        else:
+            self.output_label.setText(f'{screen}{operator}')
+
     def press_it(self, pressed):
         if pressed == "C":
             self.output_label.setText("0")
+        elif pressed == "+" or pressed == "-" or pressed == "*" or pressed == "/":
+            self.add_opetator(pressed)
         else:
             if self.output_label.text() == "0":
                 self.output_label.setText("")
@@ -344,7 +349,18 @@ class UiMainWindow(object):
         self.do_not_click_button.setText(_translate("MainWindow", "DO NOT CLICK"))
 
     @staticmethod
-    def with_dot(screen):
+    def change_label(l_result: list, l_screen: str, l_index: int):
+        """Повторяющийся функционал, вынес в отдельную функцию. Используется после нахождения
+        результата регулярного выражения в функциях with_dot() и plus_minus_it()"""
+        if l_result[0] == '-':
+            screen = l_screen[: l_index - 1] + "+" + l_screen[l_index:]
+        elif l_result[0] == '+':
+            screen = l_screen[: l_index - 1] + "-" + l_screen[l_index:]
+        elif l_result[0] == '*' or l_result[0] == '/':
+            screen = l_screen[: l_index] + f'(-{l_screen[l_index:]})'
+        return screen
+
+    def with_dot(self, screen: str) -> str:
         try:
             # получаем индекс начала последнего числа
             index = re.search(r'\w+$', screen)
@@ -354,14 +370,7 @@ class UiMainWindow(object):
             temp_index = re.search(r'\w+$', screen_temp)
             temp_index_start = temp_index.start()
 
-            if result_with_dot[0] == '-':
-                screen = screen[:temp_index_start - 1] + "+" + screen[temp_index_start:]
-            if result_with_dot[0] == '+':
-                screen = screen[0: temp_index_start - 1] + "-" + screen[temp_index_start:]
-            if result_with_dot[0] == '*':
-                screen = screen[0: temp_index_start] + f'(-{screen[temp_index_start:]})'
-            if result_with_dot[0] == '/':
-                screen = screen[0: temp_index_start] + f'(-{screen[temp_index_start:]})'
+            screen = self.change_label(result_with_dot, screen, temp_index_start)
         except (IndexError, AttributeError):
             try:
                 if screen[-1] == ")":
