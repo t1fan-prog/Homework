@@ -14,7 +14,7 @@ def caesar_cipher(l_message, l_offset, l_lang, mode='encode'):
             if mode == 'encode':
                 new_index = index + offset
             elif mode == 'decode':
-                new_index = index + offset
+                new_index = index - offset
             else:
                 raise Exception('Выбран некорректный mode')
             if i in alphabet_ru:
