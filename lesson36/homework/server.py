@@ -59,16 +59,20 @@ def write_to_file(filename, data):
 
 
 def read_from_file(filename, queue_for_file):
-    with open(filename) as file:
-        lines = file.readlines()
-        chat = ''
-        if len(lines) > 50:
-            for i in lines[len(lines) - 50:]:
-                chat += f'{i}'
-        else:
-            for i in lines:
-                chat += f'{i}'
-    queue_for_file.put(chat)
+    try:
+        with open(filename) as file:
+            lines = file.readlines()
+            chat = ''
+            if len(lines) > 50:
+                for i in lines[len(lines) - 50:]:
+                    chat += f'{i}'
+            else:
+                for i in lines:
+                    chat += f'{i}'
+        queue_for_file.put(chat)
+    except FileNotFoundError:
+        with open('history.txt', 'w'):
+            pass
 
 
 if __name__ == "__main__":
