@@ -1,5 +1,5 @@
-from sqlalchemy import create_engine, Column, Integer, String, Date, Numeric, ForeignKey, func
-from sqlalchemy.orm import declarative_base, sessionmaker, relationship, aliased
+from sqlalchemy import create_engine, Column, Integer, String, Date, Numeric, ForeignKey, func, or_
+from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 from sqlalchemy.exc import IntegrityError
 from datetime import date
 
@@ -147,7 +147,7 @@ def fifth_query():
                                                       Departments.department_id,
                                                       Departments.depart_name).\
             filter(Employees.department_id == Departments.department_id).\
-            filter(Departments.department_id == 40 or Departments.department_id == 80).all():
+            filter(or_(Departments.department_id == 40, Departments.department_id == 80)).all():
         employees.append(f'{name}, {surname}, {department_id}, {depart_name}')
     return employees
 
